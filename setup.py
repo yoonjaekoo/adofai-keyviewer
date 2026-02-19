@@ -3,7 +3,6 @@ from setuptools import setup
 APP = ['main.py']
 OPTIONS = {
     'argv_emulation': True,
-    'iconfile': 'icon.icns',  # 아이콘 있으면 넣기
     'plist': {
         'CFBundleName': 'ADOFAI Key Viewer',
         'CFBundleDisplayName': 'ADOFAI Key Viewer',
