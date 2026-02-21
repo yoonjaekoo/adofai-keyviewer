@@ -3,6 +3,12 @@ import pygame
 from pynput import keyboard
 from collections import deque
 
+if os.name == "nt":
+    try:
+        import ctypes
+        ctypes.windll.shcore.SetProcessDpiAwareness(1)
+    except: pass
+
 BG = (15, 15, 18)
 UP = (50, 50, 55)
 DOWN = (0, 200, 255)
@@ -33,8 +39,9 @@ class Tracker:
         try: k = key.char.lower()
         except: k = str(key).replace("Key.","").lower()
         if k in KEYS:
-            self.pressed.add(k)
-            self.hist.append(time.time())
+            if k not in self.pressed:
+                self.pressed.add(k)
+                self.hist.append(time.time())
 
     def release(self, key):
         try: k = key.char.lower()
@@ -70,7 +77,6 @@ if sys.platform == "darwin":
     except: pass
 if os.name == "nt":
     try:
-        import ctypes
         hwnd = pygame.display.get_wm_info()["window"]
         ctypes.windll.user32.SetWindowPos(hwnd, -1, 0,0,0,0, 1|2)
     except: pass
