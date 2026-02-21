@@ -6,7 +6,6 @@ from collections import deque
 if os.name == "nt":
     try:
         import ctypes
-        ctypes.windll.shcore.SetProcessDpiAwareness(1)
     except: pass
 
 BG = (15, 15, 18)
